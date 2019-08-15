@@ -11,7 +11,7 @@ public class ModificationStrategyProvider {
             case CAMEL_CASE:
                 return CamelCaseModificationStrategy.getInstance();
             default:
-                return new NoopModificationStrategy();
+                return NoopModificationStrategy.getInstance();
         }
     }
 }
