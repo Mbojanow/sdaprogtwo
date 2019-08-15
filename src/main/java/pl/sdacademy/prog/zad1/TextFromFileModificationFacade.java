@@ -4,15 +4,17 @@ public class TextFromFileModificationFacade {
 
     private final FileContentSupplier fileContentSupplier;
     private final ModificationStrategyProvider modificationStrategyProvider;
+    private final CustomArgumentsParser customArgumentsParser;
 
-    public TextFromFileModificationFacade(final FileContentSupplier fileContentSupplier, final ModificationStrategyProvider modificationStrategyProvider) {
+    public TextFromFileModificationFacade(final FileContentSupplier fileContentSupplier, final ModificationStrategyProvider modificationStrategyProvider, final CustomArgumentsParser customArgumentsParser) {
         this.fileContentSupplier = fileContentSupplier;
         this.modificationStrategyProvider = modificationStrategyProvider;
+        this.customArgumentsParser = customArgumentsParser;
     }
 
-    public void process(final String[] args) {
-        final ModificationType modificationType = ModificationType.valueOf(args[0]);
-        final String fileToModify = args[1];
+    public void process() {
+        final ModificationType modificationType = customArgumentsParser.getModificationType();
+        final String fileToModify = customArgumentsParser.getFilePath();
         final String textToModify = fileContentSupplier.getContentAsString(fileToModify);
         final TextModificationStrategy strategy = modificationStrategyProvider.provide(modificationType);
         final TextModifier textModifier = new TextModifier(strategy);

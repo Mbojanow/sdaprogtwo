@@ -14,6 +14,8 @@ public enum KebabCaseModificationStrategy implements TextModificationStrategy {
                     isWhiteSpaceStream = false;
                 }
                 outputTextBuilder.append(Character.toLowerCase(c));
+            } else if (c == '\n') {
+                outputTextBuilder.append(c);
             } else {
                 isWhiteSpaceStream = true;
             }
