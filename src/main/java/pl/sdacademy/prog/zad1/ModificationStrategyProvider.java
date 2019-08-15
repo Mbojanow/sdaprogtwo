@@ -5,11 +5,11 @@ public class ModificationStrategyProvider {
     public TextModificationStrategy provide(final ModificationType modificationType) {
         switch(modificationType) {
             case TEXT_COMPRESS:
-                return new CompressionModificationStrategy();
+                return CompressionModificationStrategy.getInstance();
             case KEBAB_CASE:
-                return new KebabCaseModificationStrategy();
+                return KebabCaseModificationStrategy.INSTANCE;
             case CAMEL_CASE:
-                return new CamelCaseModificationStrategy();
+                return CamelCaseModificationStrategy.getInstance();
             default:
                 return new NoopModificationStrategy();
         }

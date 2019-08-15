@@ -2,6 +2,15 @@ package pl.sdacademy.prog.zad1;
 
 public class CamelCaseModificationStrategy implements TextModificationStrategy {
 
+    private static CamelCaseModificationStrategy INSTANCE = new CamelCaseModificationStrategy();
+
+    private CamelCaseModificationStrategy() {
+    }
+
+    public static CamelCaseModificationStrategy getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public String modify(final String toModify) {
         final StringBuilder outputTextBuilder = new StringBuilder(toModify.length());
