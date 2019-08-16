@@ -8,7 +8,7 @@ public class DetectLanguageDemo {
     public static void main(String[] args) throws IOException {
         final TxtDirFilesReader txtDirFilesReader = new TxtDirFilesReader();
         final List<String> output = txtDirFilesReader.readAllFilesContent(args[0]);
-        final DetectLanguageService detectLanguageService = new DetectLanguageService();
+        final DetectLanguageNativeService detectLanguageService = new DetectLanguageNativeService();
 
         detectLanguageService.processTexts(output);
     }
