@@ -1,4 +1,4 @@
-package pl.sdacademy.prog.pl.sdacademy.prog.zad9;
+package pl.sdacademy.prog.zad9;
 
 import java.io.IOException;
 import java.util.List;
