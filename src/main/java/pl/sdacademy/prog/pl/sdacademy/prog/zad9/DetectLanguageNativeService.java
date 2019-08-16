@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 @Slf4j
 public class DetectLanguageNativeService {
 
@@ -32,10 +34,11 @@ public class DetectLanguageNativeService {
     private void processText(final String textToDetect) {
         final HttpHeaders headers = new HttpHeaders();
         headers.add(AUTHORIZATION, BEARER + " " + API_KEY);
+        headers.add(HttpHeaders.ACCEPT, APPLICATION_JSON.toString());
         final HttpEntity<Object> request = new HttpEntity<>(headers);
         try {
-            final ResponseEntity<Object> response = restTemplate.postForEntity("/0.2/detect?q=" + textToDetect, request, Object.class);
-            System.out.println(response.getBody().toString());
+            final ResponseEntity<LanguageData> response = restTemplate.postForEntity("/0.2/detect?q=" + textToDetect, request, LanguageData.class);
+            response.getBody().getDetections().getDetections().forEach(detection -> System.out.println("Language is " + detection.getLanguage() + " and is " + detection.isReliable()));
         } catch (final RestClientException exp) {
             log.error("Failed to successfully detect language");
         }
