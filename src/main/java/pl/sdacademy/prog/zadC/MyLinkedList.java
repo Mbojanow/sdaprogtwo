@@ -1,7 +1,6 @@
 package pl.sdacademy.prog.zadC;
 
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
+import static java.util.Objects.*;
 
 public class MyLinkedList<T> {
 
@@ -35,5 +34,40 @@ public class MyLinkedList<T> {
             }
         }
         return tmp.getValue();
+    }
+
+    public void addHead(final T element) {
+        final MyNode<T> newHead = new MyNode<>(element);
+        newHead.setNext(this.head);
+        this.head = newHead;
+    }
+
+    public void remove(final int index) {
+        MyNode<T> current = head;
+        MyNode<T> prev = null;
+
+        for (int idx = 0; idx < index; idx++) {
+            if (isNull(current.getNext())) {
+                throw new IndexOutOfBoundsException();
+            }
+            prev = current;
+            current = current.getNext();
+        }
+
+        prev.setNext(current.getNext());
+    }
+
+    public void add(final int index, final T element) {
+        MyNode<T> tmp = head;
+        for (int idx = 0; idx < index - 1; idx++) {
+            if (isNull(tmp.getNext())) {
+                throw new IndexOutOfBoundsException();
+            }
+            tmp = tmp.getNext();
+        }
+
+        final MyNode<T> newNode = new MyNode<>(element);
+        newNode.setNext(tmp.getNext());
+        tmp.setNext(newNode);
     }
 }
