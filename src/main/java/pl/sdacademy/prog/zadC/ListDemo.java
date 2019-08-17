@@ -14,9 +14,10 @@ public class ListDemo {
         linkedList.remove(5);
 
         linkedList.add(5, 99);
+        linkedList.add(2, 1);
 
 
-        for (int idx = 0; idx < 6; idx++) {
+        for (int idx = 0; idx < linkedList.size(); idx++) {
             System.out.println(linkedList.get(idx));
         }
     }

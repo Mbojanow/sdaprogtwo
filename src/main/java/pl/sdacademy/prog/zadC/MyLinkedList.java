@@ -1,8 +1,11 @@
 package pl.sdacademy.prog.zadC;
 
+import java.util.AbstractList;
+import java.util.List;
+
 import static java.util.Objects.*;
 
-public class MyLinkedList<T> {
+public class MyLinkedList<T> extends AbstractList<T> {
 
     private MyNode<T> head;
 
@@ -14,7 +17,19 @@ public class MyLinkedList<T> {
         return head;
     }
 
-    public void add(final T element) {
+    @Override
+    public int size() {
+        MyNode<T> tmp = head;
+        int size = 0;
+        while (nonNull(tmp)) {
+            tmp = tmp.getNext();
+            size++;
+        }
+
+        return size;
+    }
+
+    public boolean add(final T element) {
         final MyNode<T> newNode = new MyNode<>(element);
 
         MyNode<T> tmp = this.head;
@@ -23,6 +38,7 @@ public class MyLinkedList<T> {
         }
 
         tmp.setNext(newNode);
+        return true;
     }
 
     public T get(final int index) {
@@ -42,7 +58,7 @@ public class MyLinkedList<T> {
         this.head = newHead;
     }
 
-    public void remove(final int index) {
+    public T remove(final int index) {
         MyNode<T> current = head;
         MyNode<T> prev = null;
 
@@ -54,7 +70,9 @@ public class MyLinkedList<T> {
             current = current.getNext();
         }
 
+        final MyNode<T> removedElement = current;
         prev.setNext(current.getNext());
+        return removedElement.getValue();
     }
 
     public void add(final int index, final T element) {
