@@ -88,4 +88,22 @@ public class MyLinkedList<T> extends AbstractList<T> {
         newNode.setNext(tmp.getNext());
         tmp.setNext(newNode);
     }
+
+    public void reverse() {
+        MyNode<T> prev = this.head;
+        MyNode<T> current = this.head.getNext();
+        MyNode<T> next;
+        this.head.setNext(null);
+
+        while (nonNull(current)) {
+            next = current.getNext();
+            current.setNext(prev);
+            if (next == null) {
+                this.head = current;
+            }
+            prev = current;
+            current = next;
+        }
+
+    }
 }

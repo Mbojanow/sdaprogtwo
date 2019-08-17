@@ -10,12 +10,12 @@ public class ListDemo {
         linkedList.add(12);
         linkedList.add(7);
 
-        linkedList.addHead(2);
-        linkedList.remove(5);
-
-        linkedList.add(5, 99);
-        linkedList.add(2, 1);
-
+//        linkedList.addHead(2);
+//        linkedList.remove(5);
+//
+//        linkedList.add(5, 99);
+//        linkedList.add(2, 1);
+        linkedList.reverse();
 
         for (int idx = 0; idx < linkedList.size(); idx++) {
             System.out.println(linkedList.get(idx));
