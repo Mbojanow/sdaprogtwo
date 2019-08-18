@@ -17,13 +17,13 @@ public class MyQueue<T> extends AbstractQueue<T> {
     @Override
     public T poll() {
         final T element = peek();
-        elements.removeLast();
+        elements.removeFirst();
         return element;
     }
 
     @Override
     public T peek() {
-        return elements.getLast();
+        return elements.getFirst();
     }
 
     @Override
