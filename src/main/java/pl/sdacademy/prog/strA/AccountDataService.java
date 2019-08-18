@@ -52,7 +52,7 @@ public class AccountDataService {
         if (data.length >= REQUIRED_ARGS_NUM) {
             return Double.parseDouble(data[AMOUNT_INDEX]);
         }
-        return new Random().nextDouble();
+        return new Random().nextDouble() * 1e6;
     }
 
     public void saveToFile(final String path, final List<AccountData> accountsData) {
