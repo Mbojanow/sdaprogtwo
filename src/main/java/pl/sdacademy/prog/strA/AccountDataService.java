@@ -1,9 +1,12 @@
 package pl.sdacademy.prog.strA;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -24,20 +27,25 @@ public class AccountDataService {
         return Files.readAllLines(Paths.get(path)).stream()
                 .map(line -> line.split(SEPARATOR))
                 .map(this::dataArrayToAccountData)
+                .flatMap(Optional::stream)
                 .collect(Collectors.toList());
     }
 
-    private AccountData dataArrayToAccountData(final String[] data) {
+    private Optional<AccountData> dataArrayToAccountData(final String[] data) {
+        if (data.length == 1 && data[0].equals("")) {
+            return Optional.empty();
+        }
+
         if (data.length < MINIMUM_DATA_LEN) {
             throw new AccountDataException("Line does not contain required data");
         }
 
-        return AccountData.builder()
+        return Optional.of(AccountData.builder()
                 .country(data[COUNTRY_INDEX])
                 .currencyFullName(data[CURRENCY_FULL_NAME_INDEX])
                 .currencyShortName(data[CURRENCY_SHORT_NAME_INDEX])
                 .amount(getAmount(data))
-                .build();
+                .build());
     }
 
     private Double getAmount(final String[] data) {
@@ -45,5 +53,16 @@ public class AccountDataService {
             return Double.parseDouble(data[AMOUNT_INDEX]);
         }
         return new Random().nextDouble();
+    }
+
+    public void saveToFile(final String path, final List<AccountData> accountsData) {
+        try (final BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(path), StandardOpenOption.CREATE)) {
+            for (final AccountData accountData: accountsData) {
+                bufferedWriter.write(accountData.toCsv());
+                bufferedWriter.newLine();
+            }
+        } catch (final IOException exp) {
+            throw new AccountDataException(exp);
+        }
     }
 }

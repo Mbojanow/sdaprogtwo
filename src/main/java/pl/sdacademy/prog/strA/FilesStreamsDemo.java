@@ -10,5 +10,7 @@ public class FilesStreamsDemo {
         final AccountDataService accountDataService = new AccountDataService();
 
         accountDataService.readFromFile(path).forEach(System.out::println);
+
+        accountDataService.saveToFile("E:\\dev\\SDA\\Prog2\\streamsData2.txt", accountDataService.readFromFile(path));
     }
 }

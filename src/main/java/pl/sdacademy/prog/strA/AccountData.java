@@ -14,4 +14,8 @@ public class AccountData {
     private String currencyFullName;
     private String currencyShortName;
     private Double amount;
+
+    public String toCsv() {
+        return String.join(",", country, currencyFullName, currencyShortName, amount.toString());
+    }
 }
