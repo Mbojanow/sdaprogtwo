@@ -27,8 +27,8 @@ public class ReflectionsUtil {
                 .orElse(null);
     }
 
-    private Optional<Constructor<?>> getNoArgsConstructor(final Class<?> clazz) {
-        return Stream.of(clazz.getConstructors())
+    public Optional<Constructor<?>> getNoArgsConstructor(final Class<?> clazz) {
+        return Stream.of(clazz.getDeclaredConstructors())
                 .filter(constructor -> constructor.getParameterCount() == 0)
                 .findFirst();
     }
@@ -53,7 +53,7 @@ public class ReflectionsUtil {
     }
 
 
-    private Object createInstanceWithNoArgsOrNull(final Constructor<?> constructor, final Class<?> clazz) {
+    public Object createInstanceWithNoArgsOrNull(final Constructor<?> constructor, final Class<?> clazz) {
         try {
             return createInstanceWithNoArgs(constructor, clazz);
         } catch (final Exception exp) {
