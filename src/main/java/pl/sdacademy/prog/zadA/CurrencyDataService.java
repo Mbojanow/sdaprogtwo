@@ -24,6 +24,7 @@ public class CurrencyDataService {
         .collect(Collectors.toList());
   }
 
+  // Optional<CurrencyData>
   private CurrencyData mapToCurrencyData(final String fileLine) {
     final String[] splitLine = fileLine.split(",");
     if (splitLine.length < MIN_DATA_LEN) {
