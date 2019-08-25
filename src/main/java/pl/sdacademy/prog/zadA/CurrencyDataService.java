@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -21,11 +22,18 @@ public class CurrencyDataService {
     return Files.readAllLines(Paths.get(filePath))
         .stream()
         .map(this::mapToCurrencyData)
+        //.flatMap(opt -> opt.stream()) -- tylko java11
+        .filter(Optional::isPresent)
+        .map(Optional::get)
         .collect(Collectors.toList());
   }
 
   // Optional<CurrencyData>
-  private CurrencyData mapToCurrencyData(final String fileLine) {
+  private Optional<CurrencyData> mapToCurrencyData(final String fileLine) {
+    if (fileLine.isEmpty()) {
+      return Optional.empty();
+    }
+
     final String[] splitLine = fileLine.split(",");
     if (splitLine.length < MIN_DATA_LEN) {
       throw new RuntimeException("Data length is not long enough");
@@ -40,11 +48,11 @@ public class CurrencyDataService {
     // 2e5 = 2 * 10 ^ 5
     // 1e6 = 1 * 10 ^ 6
 
-    return CurrencyData.builder()
+    return Optional.of(CurrencyData.builder()
         .countryName(splitLine[COUNTRY_INDEX])
         .currencyFullName(splitLine[CURRENCY_SHORT_NAME_INDEX])
         .currencyShortName(splitLine[CURRENCY_FULL_NAME_INDEX])
         .amount(amount)
-        .build();
+        .build());
   }
 }

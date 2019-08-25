@@ -12,7 +12,24 @@ public class CurrencyPracticeMain {
     final CurrencyDataService currencyDataService = new CurrencyDataService();
 
     final List<CurrencyData> currencyData = currencyDataService.processDataFromFile(inputFile);
-    final CurrencyDataWriter currencyDataWriter = new CurrencyDataWriter();
-    currencyDataWriter.saveToFile(outputFile, currencyData);
+
+    final CurrencyStatisticsProvider currencyStatisticsProvider = new CurrencyStatisticsProvider();
+    currencyStatisticsProvider.getCountriesWithSingleWord(currencyData)
+        .forEach(System.out::println);
+
+    System.out.println(currencyStatisticsProvider.getCountriesWithUSD(currencyData));
+
+    currencyStatisticsProvider.getCountriesWithEUR(currencyData)
+        .forEach(System.out::println);
+
+    System.out.println("-------------------------");
+    currencyStatisticsProvider.getCountriesWithOwnCurrency(currencyData)
+        .forEach(System.out::println);
+
+    currencyStatisticsProvider.getCurrencyToNumbersOfCountriesUsingIt(currencyData)
+        .forEach((k, v) -> System.out.println(k + " " + v));
+
+//    final CurrencyDataWriter currencyDataWriter = new CurrencyDataWriter();
+//    currencyDataWriter.saveToFile(outputFile, currencyData);
   }
 }
