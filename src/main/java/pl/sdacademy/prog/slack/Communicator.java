@@ -1,17 +1,36 @@
 package pl.sdacademy.prog.slack;
 
+import static java.util.Objects.isNull;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Communicator {
-  private List<Channel> channels;
+public enum Communicator {
+  INSTANCE;
+
+  private List<Channel> channels = new ArrayList<>();
+
+  // POPRAWNIE STWORZONY SINGLETON TYPU DOUBLE CHECKED
+//  private static Communicator instance;
+//
+//  // double checked
+//  public static Communicator getInstance() {
+//    // rownowazne instance == null
+//    if (isNull(instance)) {
+//      synchronized (Communicator.class) {
+//        if (isNull(instance)) {
+//          instance = new Communicator();
+//        }
+//      }
+//    }
+//    return instance;
+//  }
+//
+//  private Communicator() {
+//  }
 
   public List<Channel> getPublicChannels() {
     return channels.stream()

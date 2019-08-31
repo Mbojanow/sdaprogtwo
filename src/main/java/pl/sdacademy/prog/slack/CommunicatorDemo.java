@@ -9,7 +9,7 @@ public class CommunicatorDemo {
 
     final Channel prog2 = new Channel("Prog2", "Programowanie2",
         new ArrayList<>(), new ArrayList<>(), false);
-    final Communicator communicator = new Communicator(new ArrayList<>());
+    final Communicator communicator = Communicator.INSTANCE;
     final User userA = new User("asd@gmail.com", "Grazyna",
         new ArrayList<>(), communicator);
     final User userB = new User("asdx@gmail.com", "Janusz",
