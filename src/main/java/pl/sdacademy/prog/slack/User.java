@@ -22,6 +22,7 @@ public class User {
   private String displayName;
   private List<Channel> subscribedChannels;
   private Communicator communicator;
+  private Role role;
 
   // design patterns - observer
   public void onMessageSend(final Message message, final Channel channel) {

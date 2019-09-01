@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ChannelManagementService {
+public class ChannelManagementService implements ChannelManagement {
 
   private Communicator communicator;
 
