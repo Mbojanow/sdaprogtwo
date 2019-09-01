@@ -13,6 +13,10 @@ import lombok.NoArgsConstructor;
 public class Communicator {
   private List<Channel> channels;
 
+  public List<Channel> getChannels() {
+    return channels;
+  }
+
   public List<Channel> getPublicChannels() {
     return channels.stream()
         .filter(channel -> !channel.isPrivate())
