@@ -1,5 +1,6 @@
 package pl.sdacademy.prog.multithreading.booleans;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AtomicBooleanThread implements Runnable {
