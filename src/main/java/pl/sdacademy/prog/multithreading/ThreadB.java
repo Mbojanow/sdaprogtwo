@@ -19,13 +19,13 @@ public class ThreadB implements Runnable {
           executeTaskIfMamusiaNotCalling(2500L, " is eating dessert") &&
           executeTaskIfMamusiaNotCalling(2000L, " is watching TV");
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      System.out.println("Mamusia is calling. Calling it a day");
     }
   }
 
   private boolean executeTaskIfMamusiaNotCalling(final long sleepTime, final String taskDescription) throws InterruptedException {
     Thread.sleep(sleepTime);
-    if (isMamusiaCalling) {
+    if (Thread.currentThread().isInterrupted()) {
       System.out.println("Mamusia is calling. Calling it a day");
       return false;
     }

@@ -16,7 +16,9 @@ public class ThreadingMain {
     thrB.start();
 
     Thread.sleep(5000L);
-    isMamusiaCalling = true;
+    //isMamusiaCalling = true;
+    thrA.interrupt();
+    thrB.interrupt();
 
     thrA.join();
     thrB.join();

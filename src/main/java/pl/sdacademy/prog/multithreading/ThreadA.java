@@ -23,13 +23,15 @@ public class ThreadA implements Runnable {
       executeTaskIfMamusiaNotCalling(1000L , " is eating dinner") &&
       executeTaskIfMamusiaNotCalling(2000L , " is doing homework");
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      System.out.println("Mamusia is calling. Calling it a day");
     }
   }
 
   private boolean executeTaskIfMamusiaNotCalling(final long sleepTime, final String taskDescription) throws InterruptedException {
     Thread.sleep(sleepTime);
-    if (isMamusiaCalling) {
+    //przyklad na volative
+    //if (isMamusiaCalling) {
+    if (Thread.currentThread().isInterrupted()) {
       System.out.println("Mamusia is calling. Calling it a day");
       return false;
     }
