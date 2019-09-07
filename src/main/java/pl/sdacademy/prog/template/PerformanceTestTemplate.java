@@ -3,13 +3,13 @@ package pl.sdacademy.prog.template;
 public abstract class PerformanceTestTemplate {
 
   //ilosc iteracji rozgrzewkowych
-  public abstract int getWarmupIterationsNum();
+  protected abstract int getWarmupIterationsNum();
 
   // ilosc iteracji mierzonyvh
-  public abstract int getIterationsNum();
+  protected abstract int getIterationsNum();
 
   // kawalek kodu ktorego czas bede mierzyl - pojedyczna iteracja
-  public abstract void testIteration();
+  protected abstract void testIteration();
 
   // szkielet algorytmu - TEMPLATE design pattern - zależnosci miedzy zachowaniem metod (np kolejnosc)
   public void run() {
