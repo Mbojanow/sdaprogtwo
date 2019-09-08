@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class StrategyDemoMain {
 
   public static void main(String[] args) {
@@ -39,6 +42,7 @@ public class StrategyDemoMain {
 
     final TextModificationStrategy strategyByType = provider.getStrategyByType(type);
 
+    log.info("Preparing to modify text:\n" + toModify);
     strategyByType.process(toModify);
   }
 }
