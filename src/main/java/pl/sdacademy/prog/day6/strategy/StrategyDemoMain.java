@@ -8,14 +8,15 @@ import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class StrategyDemoMain {
 
   public static void main(String[] args) {
-    final String type = args[0];
-    final String fileWithText = args[1];
+    final TextModificationStrategyProvider provider = new TextModificationStrategyProvider();
+    final FileContentModificationService service = new FileContentModificationService(provider);
+    service.processFile(args);
+  }
 
-    // przed java7
+  // przed java7
 //    BufferedReader bufferedReader = null;
 //    try {
 //      bufferedReader = new BufferedReader(new FileReader(fileWithText));
@@ -30,19 +31,4 @@ public class StrategyDemoMain {
 //        }
 //      }
 //    }
-
-    String toModify;
-    try (final BufferedReader bufferedReader = new BufferedReader(new FileReader(fileWithText))) {
-      toModify = bufferedReader.lines().collect(Collectors.joining("\n"));
-    } catch (final IOException exp) {
-      throw new SdaException("Cannot open file " + fileWithText, exp);
-    }
-
-    final TextModificationStrategyProvider provider = new TextModificationStrategyProvider();
-
-    final TextModificationStrategy strategyByType = provider.getStrategyByType(type);
-
-    log.info("Preparing to modify text:\n" + toModify);
-    strategyByType.process(toModify);
-  }
 }

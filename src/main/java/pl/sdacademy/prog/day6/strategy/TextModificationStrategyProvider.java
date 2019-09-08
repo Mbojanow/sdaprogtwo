@@ -7,17 +7,17 @@ public class TextModificationStrategyProvider {
   public TextModificationStrategy getStrategyByType(final String type) {
     final List<String> allNames = TextModificationType.getAllValueNames();
     if (!allNames.contains(type)) {
-      return new NoOpModicationStrategy();
+      return NoOpModicationStrategy.getInstance();
     }
 
     final TextModificationType enumType = TextModificationType.valueOf(type);
     switch (enumType) {
       case COMPRESSION:
-        return new TextCompressionModificationStrategy();
+        return TextCompressionModificationStrategy.getInstance();
       case KEBAB_CASE:
-        return new KebabCaseModificationStrategy();
+        return KebabCaseModificationStrategy.getInstance();
       case CAMEL_CASE:
-        return new CamelCaseModificationStrategy();
+        return CamelCaseModificationStrategy.INSTANCE;
     }
     throw new UnsupportedStrategyTypeException("Unsupported strategy type");
   }

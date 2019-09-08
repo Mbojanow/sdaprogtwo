@@ -1,6 +1,8 @@
 package pl.sdacademy.prog.day6.strategy;
 
-public class CamelCaseModificationStrategy implements TextModificationStrategy {
+// ENUM
+public enum CamelCaseModificationStrategy implements TextModificationStrategy {
+  INSTANCE;
 
   @Override
   public void process(final String text) {
