@@ -11,14 +11,18 @@ import lombok.extern.slf4j.Slf4j;
 public class FileContentModificationService {
 
   private final TextModificationStrategyProvider provider;
+  private final CustomCommandLineParser parser;
 
-  public FileContentModificationService(final TextModificationStrategyProvider provider) {
+  public FileContentModificationService(final TextModificationStrategyProvider provider,
+                                        final CustomCommandLineParser parser) {
     this.provider = provider;
+    this.parser = parser;
   }
 
   public void processFile(String[] args) {
-    final String type = args[0];
-    final String fileWithText = args[1];
+    parser.parseArguments(args);
+    final String type = parser.getModificationTypeArgValue();
+    final String fileWithText = parser.getFilePathArgValue();
     final String toModify = readContentAsString(fileWithText);
     final TextModificationStrategy strategyByType = provider.getStrategyByType(type);
 

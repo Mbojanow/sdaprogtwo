@@ -1,19 +1,21 @@
 package pl.sdacademy.prog.day6.strategy;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.stream.Collectors;
-
-import lombok.extern.slf4j.Slf4j;
+import static java.util.Objects.nonNull;
 
 public class StrategyDemoMain {
 
   public static void main(String[] args) {
     final TextModificationStrategyProvider provider = new TextModificationStrategyProvider();
-    final FileContentModificationService service = new FileContentModificationService(provider);
-    service.processFile(args);
+    final CustomCommandLineParser parser = new CustomCommandLineParser();
+    final FileContentModificationService service = new FileContentModificationService(provider, parser);
+    try {
+      service.processFile(args);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      if (nonNull(e.getCause())) {
+        System.out.println(e.getCause().getMessage());
+      }
+    }
   }
 
   // przed java7
