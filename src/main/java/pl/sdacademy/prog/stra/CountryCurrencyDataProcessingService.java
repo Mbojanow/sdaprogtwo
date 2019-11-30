@@ -17,11 +17,24 @@ public class CountryCurrencyDataProcessingService {
   private static final int ADDITIONAL_DATA_LEN = 4;
   private static final double AMOUNT_UPPER_BOUND = 10e6;
 
+  private final CountryCurrencyDataValidator countryCurrencyDataValidator;
+
+  // soliD - D jak DependencyInjection
+  public CountryCurrencyDataProcessingService(final CountryCurrencyDataValidator countryCurrencyDataValidator) {
+    this.countryCurrencyDataValidator = countryCurrencyDataValidator;
+  }
+
+  // ZŁO... WIELKIE ZŁO!!!!!
+//  public CountryCurrencyDataProcessingService() {
+//    countryCurrencyDataValidator = new CountryCurrencyDataValidator();
+//  }
+
   public List<CountryCurrencyData> readDataFromFile(final String path) {
     return readLinesFromFile(path).stream()
         .filter(line -> !line.isEmpty())
         .map(line -> line.split(","))
         .map(this::toCountryCurrencyData)
+        .filter(countryCurrencyDataValidator::isValid)
         .collect(Collectors.toList());
   }
 
