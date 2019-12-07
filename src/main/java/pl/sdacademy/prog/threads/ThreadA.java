@@ -1,5 +1,7 @@
 package pl.sdacademy.prog.threads;
 
+import java.util.Optional;
+
 public class ThreadA implements Runnable {
 
   private String name;
@@ -19,17 +21,30 @@ public class ThreadA implements Runnable {
   public void run() {
     try {
       Thread.sleep(1000L);
+      callItADayIfMamusiaIsCalling().orElseThrow();
       System.out.println(name + " is waking up");
       Thread.sleep(2000L);
+      callItADayIfMamusiaIsCalling().orElseThrow();
       System.out.println(name + " is eating breakfast");
       Thread.sleep(5000L);
+      callItADayIfMamusiaIsCalling().orElseThrow();
       System.out.println(name + " is coming back from school");
       Thread.sleep(1000L);
+      callItADayIfMamusiaIsCalling().orElseThrow();
       System.out.println(name + " is eating dinner");
       Thread.sleep(2000L);
+      callItADayIfMamusiaIsCalling().orElseThrow();
       System.out.println(name + " is doing homework");
     } catch (final InterruptedException exp) {
-
+      System.out.println("Mamusia is calling. I am done.");
     }
+  }
+
+  private Optional<Boolean> callItADayIfMamusiaIsCalling() {
+    if (Thread.currentThread().isInterrupted()) {
+      System.out.println("Mamusia is calling. I am done.");
+      return Optional.empty();
+    }
+    return Optional.of(true);
   }
 }

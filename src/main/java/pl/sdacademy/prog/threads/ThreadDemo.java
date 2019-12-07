@@ -9,6 +9,10 @@ public class ThreadDemo {
     thrA.start();
     thrB.start();
 
+    Thread.sleep(6000);
+    thrA.interrupt();
+    thrB.interrupt();
+
     thrA.join();
     thrB.join();
   }
