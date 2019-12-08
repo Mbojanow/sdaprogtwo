@@ -32,14 +32,17 @@ public class Channel {
       return;
     }
 
-    final Message message = Message.builder()
-        .username(user.getName())
+    final Message message = createMessage(messageText, user.getName());
+    messages.add(message);
+    users.forEach(subscribedUser -> subscribedUser.handleNewMessage(name, message));
+  }
+
+  private Message createMessage(final String messageText, final String username) {
+    return Message.builder()
+        .username(username)
         .createdAt(LocalDateTime.now())
         .value(messageText)
         .build();
-
-    messages.add(message);
-    users.forEach(subscribedUser -> subscribedUser.handleNewMessage(name, message));
   }
 
   public void subscribe(final User user) {
