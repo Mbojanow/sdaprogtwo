@@ -7,7 +7,7 @@ public abstract class TextConversionStrategyTemplate implements TextConversionSt
     final StringBuilder outputBuilder = new StringBuilder(textToModify.length());
     boolean shouldApplyActionBeforeNextWord = false;
     for (final Character c : textToModify.trim().toCharArray()) {
-      if (Character.isLetterOrDigit(c)) {
+      if (Character.isLetterOrDigit(c) || c == '\n') {
         shouldApplyActionBeforeNextWord = handleAlphanumericChar(c,
             shouldApplyActionBeforeNextWord, outputBuilder);
       } else {

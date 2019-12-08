@@ -1,6 +1,7 @@
 package pl.sdacademy.prog.strategy;
 
-public class NoOpConversionStrategy implements TextConversionStrategy {
+public enum NoOpConversionStrategy implements TextConversionStrategy {
+  INSTANCE;
 
   @Override
   public String modify(final String textToModify) {

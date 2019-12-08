@@ -5,12 +5,12 @@ public class ConversionStrategyProvider {
   public TextConversionStrategy getStrategy(final ConversionType type) {
     switch (type) {
       case CAMEL_CASE:
-        return new CamelCaseConversionStrategy();
+        return CamelCaseConversionStrategy.getInstance();
       case KEBAB_CASE:
-        return new KebabCaseConversionStrategy();
+        return KebabCaseConversionStrategy.getInstance();
       case COMPRESSION:
-        return new CompressionConversionStrategy();
+        return CompressionConversionStrategy.getInstance();
     }
-    return new NoOpConversionStrategy();
+    return NoOpConversionStrategy.INSTANCE;
   }
 }
