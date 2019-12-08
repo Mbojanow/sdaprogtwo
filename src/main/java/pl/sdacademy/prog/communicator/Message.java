@@ -1,6 +1,8 @@
 package pl.sdacademy.prog.communicator;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,8 @@ public class Message {
   private String username;
 
   public String getReadable() {
-    return createdAt.toString() + " " + username + "\n" + value;
+    final DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+        .ofPattern("dd-MM-yyyy hh:mm");
+    return createdAt.format(dateTimeFormatter) + " " + username + "\n" + value;
   }
 }

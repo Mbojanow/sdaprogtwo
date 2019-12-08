@@ -5,9 +5,7 @@ import java.util.ArrayList;
 public class CommunicatorDemo {
 
   public static void main(String[] args) {
-    final Communicator communicator = Communicator.builder()
-        .channels(new ArrayList<>())
-        .build();
+    final Communicator communicator = Communicator.INSTANCE;
     final Channel channel = Channel.builder()
         .isPrivate(false)
         .messages(new ArrayList<>())
