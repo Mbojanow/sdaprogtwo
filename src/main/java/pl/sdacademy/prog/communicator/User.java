@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Data
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Builder
 @Slf4j
+@ToString(exclude = {"subscribedChannels"})
 public class User {
   private String email;
   private String name;
@@ -43,6 +45,7 @@ public class User {
 
   private void handleChannelSubscription(final Channel channel) {
     channel.subscribe(this);
+    subscribedChannels.add(channel);
     final List<String> allExistingMessages = channel.getAllReadableMessages();
     saveMessages(channel.getName(), allExistingMessages, StandardOpenOption.CREATE);
   }
