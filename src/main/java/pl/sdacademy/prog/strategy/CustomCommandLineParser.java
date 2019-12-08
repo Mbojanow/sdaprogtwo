@@ -27,7 +27,7 @@ public class CustomCommandLineParser {
   }
 
   public String getFilePathArgValue() {
-    return commandLine.getOptionValue(FILE_PATH_ARG_NAME);
+    return commandLine.getOptionValue(FILE_PATH_ARG_NAME)  ;
   }
 
   public ConversionType getConversionTypeArgValue() {

@@ -9,17 +9,12 @@ import org.apache.commons.cli.Options;
 public class ConversionStrategyDemo {
   //-t=KEBAB_CASE -f=/Users/michalbojanowski/work/spam/sdaprogtwo/src/main/resources/sometext  public static void main(String[] args) {
   public static void main(String[] args) {
-    CustomCommandLineParser parser = new CustomCommandLineParser();
-    parser.parse(args);
-    final ConversionType type = parser.getConversionTypeArgValue();
-    final String path = parser.getFilePathArgValue();
+    final CustomCommandLineParser parser = new CustomCommandLineParser();
     final FileContentProvider fileContentProvider = new FileContentProvider();
-    final String toModify = fileContentProvider.readContent(path);
-
     final ConversionStrategyProvider strategyProvider = new ConversionStrategyProvider();
-    final TextConversionStrategy strategy = strategyProvider.getStrategy(type);
-    final String modified = strategy.modify(toModify);
-    System.out.println(modified);
 
+    final TextProcessingFacade facade = new TextProcessingFacade(
+        parser, fileContentProvider, strategyProvider);
+    facade.process(args);
   }
 }
