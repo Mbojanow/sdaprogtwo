@@ -8,19 +8,23 @@ public class BackpacksProcessingFacade {
   private final TestDivider testDivider;
   private final TestExecutionInfoLoader testExecutionInfoLoader;
   private final SplitTestExecutionInfoPersister splitTestExecutionInfoPersister;
+  private final BackpacksCommandLineParser backpacksCommandLineParser;
 
   public BackpacksProcessingFacade(final TestDivider testDivider,
                                    final TestExecutionInfoLoader testExecutionInfoLoader,
-                                   final SplitTestExecutionInfoPersister splitTestExecutionInfoPersister) {
+                                   final SplitTestExecutionInfoPersister splitTestExecutionInfoPersister,
+                                   final BackpacksCommandLineParser backpacksCommandLineParser) {
     this.testDivider = testDivider;
     this.testExecutionInfoLoader = testExecutionInfoLoader;
     this.splitTestExecutionInfoPersister = splitTestExecutionInfoPersister;
+    this.backpacksCommandLineParser = backpacksCommandLineParser;
   }
 
   public void process(final String[] args) {
-    final String inputFile = args[0];
-    final String outputDir = args[1];
-    final int backpacksNum = Integer.parseInt(args[2]);
+    backpacksCommandLineParser.parse(args);
+    final String inputFile = backpacksCommandLineParser.getInputFileArgValue();
+    final String outputDir = backpacksCommandLineParser.getOutputFileArgValue();
+    final int backpacksNum = backpacksCommandLineParser.getBackpacksArgValue();
 
     final List<TestExecutionInfo> loadedInfo
         = testExecutionInfoLoader.load(inputFile);
