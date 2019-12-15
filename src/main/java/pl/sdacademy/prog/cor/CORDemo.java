@@ -1,26 +1,26 @@
 package pl.sdacademy.prog.cor;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 public class CORDemo {
 
   public static void main(String[] args) {
 
     final UserCredentialsRepository userCredentialsRepository = new UserCredentialsRepository();
-    final Authenticator userCredentialsService =
+    final UserCredentialsService userCredentialsService =
         new UserCredentialsService(PasswordEncoder.getBCryptPasswordEncoder(),
         userCredentialsRepository);
-    final UserCredentials userCredentials = new UserCredentials("Andrzej", "andy_123");
 
     final TokenRepository tokenRepository = new TokenRepository();
-    final Authenticator tokenService = new TokenService(tokenRepository);
-    final Token token = new Token("grazyna", UUID.randomUUID(),
-        LocalDateTime.now().plusMinutes(1));
+    final TokenService tokenService = new TokenService(tokenRepository);
 
     final AuthenticationService authenticationServiceToken = new AuthenticationService(tokenService);
-    final AuthenticationService authenticationServiceUnp = new AuthenticationService(tokenService,
+    final AuthenticationService authenticationServiceUnp = new AuthenticationService(userCredentialsService,
         authenticationServiceToken);
 
+    userCredentialsService.createCredentials("Andrzej", "andy_1234");
+    final Token grazyna = tokenService.generate("Andrzejy");
+
+    final boolean result = authenticationServiceUnp.authenticate("Andrzej",
+        grazyna.getValue().toString());
+    System.out.println(result);
   }
 }
