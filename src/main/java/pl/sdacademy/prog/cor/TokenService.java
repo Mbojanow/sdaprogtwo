@@ -67,15 +67,15 @@ dostajemy wartość nowego)
     }
     return Optional.empty();
   }
+
+  public boolean matches(final String username, final String tokenValue) {
+    return tokenRepository.findAll().stream()
+        .anyMatch(token -> matches(username, tokenValue, token));
+  }
+
+  private boolean matches(final String username, final String tokenValue, final Token token) {
+    return token.getExpirationTime().isAfter(LocalDateTime.now()) &&
+        token.getName().equals(username) &&
+        token.getValue().toString().equals(tokenValue);
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
