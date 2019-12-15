@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TokenService {
+public class TokenService implements Authenticator {
   /*
   Stwórz obiekt TokenService, który wykorzystuje TokenRepository do:
 - dodania lub wygenerowaniaó Tokena z ważnością 5 minut dla użytkownika.

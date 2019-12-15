@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pl.sdacademy.prog.stra.GenericException;
 
-public class UserCredentialsService {
+public class UserCredentialsService implements Authenticator {
 
   private final BCryptPasswordEncoder passwordEncoder;
   private final UserCredentialsRepository userCredentialsRepository;
