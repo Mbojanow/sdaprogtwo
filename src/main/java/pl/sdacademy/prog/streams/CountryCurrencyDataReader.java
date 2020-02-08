@@ -21,6 +21,7 @@ public class CountryCurrencyDataReader {
   public List<CountryCurrencyData> readDataFromFile(final String path) {
     try {
       return Files.readAllLines(Paths.get(path)).stream()
+          .filter(line -> !line.isEmpty())
           .map(line -> line.split(DATA_SEPARATOR))
           //przetwarzamy String[] -> CountryCurrencyData
           // rownoważne z elements -> toCountryCurrencyData(elements)

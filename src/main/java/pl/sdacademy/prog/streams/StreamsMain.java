@@ -12,5 +12,9 @@ public class StreamsMain {
             countryCurrencyData.getCurrencyFullName() + " " +
             countryCurrencyData.getCurrencyShortName() + " " +
             countryCurrencyData.getAmount()));
+
+    final String outputPath = args[1];
+    final CountryCurrencyDataWriter dataWriter = new CountryCurrencyDataWriter();
+    dataWriter.saveDataToFile(outputPath, dataList);
   }
 }
