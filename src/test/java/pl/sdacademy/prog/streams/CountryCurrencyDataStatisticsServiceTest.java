@@ -1,5 +1,7 @@
 package pl.sdacademy.prog.streams;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +21,11 @@ class CountryCurrencyDataStatisticsServiceTest {
 
   @Test
   void testA() {
-    statisticsService
-        .getCountriesWithSingleWord(dataList)
-        .forEach(System.out::println);
+    final List<String> singleWordCountries = statisticsService
+        .getCountriesWithSingleWord(dataList);
+
+    singleWordCountries
+        .forEach(countryName -> assertThat(countryName).doesNotContainAnyWhitespaces());
   }
 
   @Test
