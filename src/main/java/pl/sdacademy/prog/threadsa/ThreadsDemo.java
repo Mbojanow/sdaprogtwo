@@ -9,7 +9,7 @@ public class ThreadsDemo {
     threadA.start();
     threadB.start();
 
-    Thread.sleep(5000L);
+    Thread.sleep(2);
     threadA.interrupt();
 
     threadA.join();
