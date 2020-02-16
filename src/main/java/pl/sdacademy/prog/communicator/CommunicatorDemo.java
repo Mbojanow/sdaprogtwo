@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CommunicatorDemo {
 
   public static void main(String[] args) {
-    final Communicator communicator = new Communicator(new ArrayList<>());
+    final Communicator communicator = Communicator.INSTANCE;
     final Channel channel = new Channel("prog2", "Programowanie 2",
         new ArrayList<>(), new ArrayList<>(), false);
     communicator.createChannel(channel);
