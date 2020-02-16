@@ -18,7 +18,7 @@ public class AESEncryptionDemo {
     final String output = args[1];
     final int mode = Integer.parseInt(args[2]);
     final int seed = Integer.parseInt(args[3]);
-    final AESEncryptionService aesEncryptionService = new AESEncryptionService();
+    final AESEncryptionService aesEncryptionService = new AESEncryptionService(new AESKeyFactory());
     aesEncryptionService.executeAESOperation(inputFile, output, mode, seed);
   }
 
