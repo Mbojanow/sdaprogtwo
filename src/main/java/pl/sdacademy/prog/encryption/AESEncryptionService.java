@@ -2,6 +2,9 @@ package pl.sdacademy.prog.encryption;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,17 +38,17 @@ public class AESEncryptionService {
 
     // możemy wykorzystać TRY-WITH-RESOURCES bo BufferedReader implementuj
     // Closeable który rozszerza AutoCloseable
-    final String fileInput;
-    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(sourcePath))) {
-      fileInput = bufferedReader.lines().collect(Collectors.joining());
+    final byte[] fileInput;
+    try (FileInputStream fileInputStream = new FileInputStream(new File(sourcePath))) {
+      fileInput = fileInputStream.readAllBytes();
     } catch (IOException e) {
       throw new SdaException("Could not read input file");
     }
 
-    final byte[] output = cipher.doFinal(fileInput.getBytes());
+    final byte[] output = cipher.doFinal(fileInput);
 
-    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputPath))) {
-      bufferedWriter.write(new String(output));
+    try (FileOutputStream fileOutputStream = new FileOutputStream(new File(outputPath))) {
+      fileOutputStream.write(output);
     } catch (IOException e) {
       throw new SdaException("Could not save output file");
     }
