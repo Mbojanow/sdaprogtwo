@@ -1,11 +1,10 @@
 package pl.sdacademy.prog.communicator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CommunicatorManagementService {
+public class CommunicatorManagementService implements CommunicatorService {
 
   private final Communicator communicator;
 

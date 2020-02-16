@@ -22,6 +22,7 @@ public class User {
   private String username;
   private List<Channel> subscribedChannels;
   private Communicator communicator;
+  private Role role;
 
   public Optional<Channel> subscribe(final String channelName) {
     final Optional<Channel> optionalChannel = findChannelByName(channelName);
