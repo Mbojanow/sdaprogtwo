@@ -22,8 +22,8 @@ public class UserCredentialsRepository {
 
   public Optional<String> getPassword(final String username) {
     return allCredentials.stream()
-        .map(UserCredentials::getUsername)
-        .filter(existingUsername -> existingUsername.equals(username))
+        .filter(creds -> creds.getUsername().equals(username))
+        .map(UserCredentials::getPassword)
         .findFirst();
   }
 }
