@@ -1,16 +1,27 @@
 package pl.sdacademy.prog.strategy;
 
+import org.apache.commons.cli.ParseException;
+
 public class StrategyDemo {
   public static void main(String[] args) {
+
+    // STARE PRZYKŁADY BEZ COMMAND LINE PARSERA
     //"this shoule be -kebab cased" KEBAB_CASE
     //"this shoule be -kebab cased" COMPRESSION
-    final String filePath = args[0];
-    final String modificationType = args[1];
+
+    //-f=/Users/michalbojanowski/work/sdaprogtwo/src/main/resources/input.txt -t=CAMEL_CASE
+    final CustomCommandLineParser parser = new CustomCommandLineParser();
+    final FileContentReader reader = new FileContentReader();
     final TextModificationStrategySelector selector = new TextModificationStrategySelector();
-    final TextModificationStrategy strategy = selector.getTextModificationStrategy(modificationType);
-    final FileContentReader fileContentReader = new FileContentReader();
-    final String textToModify = fileContentReader.readContent(filePath);
-    final String output = strategy.modify(textToModify);
-    System.out.println(output);
+    final TextModificationProcessFacade facade = new TextModificationProcessFacade(
+        parser, reader, selector);
+    try {
+      System.out.println(facade.process(args));
+    } catch (ParseException e) {
+      System.out.println(e.getMessage());
+      return;
+    }
+
+
   }
 }
