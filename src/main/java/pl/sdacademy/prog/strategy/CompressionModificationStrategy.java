@@ -1,6 +1,22 @@
 package pl.sdacademy.prog.strategy;
 
+
+import static java.util.Objects.isNull;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CompressionModificationStrategy implements TextModificationStrategy {
+
+  private static CompressionModificationStrategy instance = null;
+
+  public static CompressionModificationStrategy getInstance() {
+    if (isNull(instance)) {
+      instance = new CompressionModificationStrategy();
+    }
+    return instance;
+  }
 
   @Override
   public String modify(final String input) {

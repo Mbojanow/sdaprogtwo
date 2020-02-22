@@ -1,6 +1,16 @@
 package pl.sdacademy.prog.strategy;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CamelCaseModificationStrategy implements TextModificationStrategy {
+
+  private static final CamelCaseModificationStrategy instance = new CamelCaseModificationStrategy();
+
+  public static CamelCaseModificationStrategy getInstance() {
+    return instance;
+  }
 
   @Override
   public String modify(final String input) {

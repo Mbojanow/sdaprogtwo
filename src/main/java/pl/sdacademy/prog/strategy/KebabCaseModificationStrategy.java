@@ -1,6 +1,7 @@
 package pl.sdacademy.prog.strategy;
 
-public class KebabCaseModificationStrategy implements TextModificationStrategy {
+public enum KebabCaseModificationStrategy implements TextModificationStrategy {
+  INSTANCE;
 
   @Override
   public String modify(final String input) {

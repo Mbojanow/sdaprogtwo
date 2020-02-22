@@ -5,12 +5,12 @@ public class TextModificationStrategySelector {
   public TextModificationStrategy getTextModificationStrategy(final String strategyType) {
     switch (strategyType) {
       case "COMPRESS":
-        return new CompressionModificationStrategy();
+        return CompressionModificationStrategy.getInstance();
       case "CAMEL_CASE":
-        return new CamelCaseModificationStrategy();
+        return CamelCaseModificationStrategy.getInstance();
       case "KEBAB_CASE":
-        return new KebabCaseModificationStrategy();
+        return KebabCaseModificationStrategy.INSTANCE;
     }
-    return new NoOpModificationStrategy();
+    return NoOpModificationStrategy.getInstance();
   }
 }

@@ -1,0 +1,10 @@
+Singleton
+  - EAGER
+  - LAZY
+  - ENUM
+  - DC
+Builder
+Factory
+Memento
+Strategy
+Observer
