@@ -1,5 +1,7 @@
 package pl.sdacademy.prog;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import pl.sdacademy.prog.streams.SdaException;
 
 public class UserValidator {
