@@ -39,8 +39,9 @@ public class BackpacksDividingService {
   }
 
   private int findBackpackIndexWithLowestExecutionTime(final List<BackpackTests> backpacks) {
+    final int index[] = {0};
     return backpacks.stream()
-        .collect(Collectors.toMap(backpacks::indexOf,
+        .collect(Collectors.toMap(backpack -> index[0]++,
             BackpackTests::sumExecutionTimes))
         .entrySet().stream()
         .min(Comparator.comparingLong(Map.Entry::getValue))

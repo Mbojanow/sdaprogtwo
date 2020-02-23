@@ -19,7 +19,7 @@ public class TestExecutionInfosReader {
     try {
       return Files.readAllLines(Paths.get(path)).stream()
           .map(line -> line.split(DATA_SEPARATOR))
-          .filter(splitElements -> splitElements.length != EXPECTED_DATA_LEN)
+          .filter(splitElements -> splitElements.length == EXPECTED_DATA_LEN)
           .map(this::toTestExecutionInfo)
           .collect(Collectors.toList());
     } catch (IOException e) {
