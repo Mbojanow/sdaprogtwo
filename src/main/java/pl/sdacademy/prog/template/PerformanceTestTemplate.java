@@ -30,7 +30,7 @@ public abstract class PerformanceTestTemplate {
     }
 
     final OptionalDouble average = iterationsExecutionTimes.stream()
-        .mapToDouble(dur -> TimeUnit.SECONDS.toMillis(dur.getSeconds()))
+        .mapToDouble(dur -> TimeUnit.NANOSECONDS.toMillis(dur.getNano()))
         .average();
     System.out.println(average.getAsDouble());
   }
