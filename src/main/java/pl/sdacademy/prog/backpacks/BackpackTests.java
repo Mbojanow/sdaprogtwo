@@ -1,5 +1,6 @@
 package pl.sdacademy.prog.backpacks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BackpackTests {
-  private List<TestExecutionInfo> testInfos;
+  private List<TestExecutionInfo> testInfos = new ArrayList<>();
 
   public Long sumExecutionTimes() {
     return testInfos.stream()
