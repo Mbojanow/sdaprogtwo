@@ -9,11 +9,6 @@ import java.util.Optional;
 public class UserCredentialsRepository {
   private List<UserCredentials> allCredentials = new ArrayList<>();
 
-  /*public void add(final UserCredentials credentials)
-public void update(final UserCredentials credentials)
- public void delete(final String username)
-public Optional<String> getPassword(final String username)*/
-
   public void add(final UserCredentials credentials) {
     allCredentials.add(credentials);
   }

@@ -45,6 +45,10 @@ public class UserCredentialsService implements Authenticator {
     if (hashedPassword.isEmpty()) {
       return false;
     }
-    return passwordEncoder.matches(password, hashedPassword.get());
+    try {
+      return passwordEncoder.matches(password, hashedPassword.get());
+    } catch (final Exception exp) {
+      return false;
+    }
   }
 }
