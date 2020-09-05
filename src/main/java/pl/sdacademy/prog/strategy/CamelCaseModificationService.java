@@ -7,18 +7,19 @@ public class CamelCaseModificationService implements TextModificationService {
     final String trimmedText = toModify.trim();
     boolean isNextAlphabeticCharUppercase = false;
     boolean isFirstChar = true;
-    final StringBuilder sb = new StringBuilder(toModify.length());
+    final StringBuilder sb = new StringBuilder(trimmedText.length());
     for (final char ch : trimmedText.toCharArray()) {
       if (isFirstChar) {
-        sb.append(Character.toLowerCase(ch));
+        sb.append(Character.toLowerCase(ch)); // j
         isFirstChar = false;
+        continue;
       }
       if (Character.isAlphabetic(ch)) {
         if (isNextAlphabeticCharUppercase) {
           sb.append(Character.toUpperCase(ch));
           isNextAlphabeticCharUppercase = false;
         } else {
-          sb.append(ch);
+          sb.append(ch); // j
         }
       } else {
         isNextAlphabeticCharUppercase = true;
