@@ -1,12 +1,8 @@
 package pl.sdacademy.prog.strategy;
 
-public class TextCompressionModificationService implements TextModificationService {
-
-  //TO jest jakieś, długie zdanie
-  //TOJestJakieś
-
-  // " to jest jakies zdanie. "
-  // toJestJakiesZdanie
+//singleton enum
+public enum TextCompressionModificationService implements TextModificationService {
+  INSTANCE;
 
   @Override
   public String modify(final String toModify) {

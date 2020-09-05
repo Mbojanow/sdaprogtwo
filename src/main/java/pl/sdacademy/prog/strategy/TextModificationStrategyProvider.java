@@ -3,14 +3,20 @@ package pl.sdacademy.prog.strategy;
 public class TextModificationStrategyProvider {
 
   public TextModificationService selectStrategy(final String type) {
-    final TextModificationType textModificationType = TextModificationType.valueOf(type);
+    final TextModificationType textModificationType;
+    try {
+      textModificationType = TextModificationType.valueOf(type);
+    } catch (final IllegalArgumentException exp) {
+      return NoOpTextModificationStrategy.getInstance();
+    }
+
     switch (textModificationType) {
       case CAMEL_CASE:
-        return new CamelCaseModificationService();
+        return CamelCaseModificationService.getInstance();
       case COMPRESSION:
-        return new TextCompressionModificationService();
+        return TextCompressionModificationService.INSTANCE;
       case KEBAB_CASE:
-        return new KebabCaseModificationStrategy();
+        return KebabCaseModificationStrategy.getInstance();
     }
     throw new StrategyException("Unknown strategy type");
   }

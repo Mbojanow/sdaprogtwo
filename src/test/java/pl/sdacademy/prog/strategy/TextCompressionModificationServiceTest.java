@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class TextCompressionModificationServiceTest {
 
-  private final TextCompressionModificationService service = new TextCompressionModificationService();
+  private final TextCompressionModificationService service = TextCompressionModificationService.INSTANCE;
 
   @Test
   void shouldCompressTest() {

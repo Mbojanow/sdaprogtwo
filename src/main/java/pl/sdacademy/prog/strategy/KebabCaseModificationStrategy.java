@@ -3,7 +3,19 @@ package pl.sdacademy.prog.strategy;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+// LAZY
 public class KebabCaseModificationStrategy implements TextModificationService {
+
+  private static KebabCaseModificationStrategy instance = null;
+
+  private KebabCaseModificationStrategy() {}
+
+  public static KebabCaseModificationStrategy getInstance() {
+    if (instance == null) {
+      instance = new KebabCaseModificationStrategy();
+    }
+    return instance;
+  }
 
   @Override
   public String modify(final String toModify) {
